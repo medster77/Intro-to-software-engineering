@@ -16,12 +16,10 @@ public class TodoListApplication extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
-        // 2. Make the scene background transparent to hide the white corners
         scene.setFill(Color.TRANSPARENT);
 
         stage.setTitle("Hello!");
 
-        // 3. Make the operating system window border borderless and transparent
         stage.initStyle(StageStyle.TRANSPARENT);
 
         stage.setScene(scene);

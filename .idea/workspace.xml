@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="Initial commit times 2">
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="Put a title name box in there, this can be modified to have a different background color">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,19 +70,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="TodoListApp" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="TodoListApp" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="" />
@@ -106,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790800190015</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Put a title name box in there, this can be modified to have a different background color">
+      <option name="closed" value="true" />
+      <created>1790801998642</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1790801998642</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,7 +134,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Initial commit times 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit times 2" />
+    <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
+    <option name="LAST_COMMIT_MESSAGE" value="Put a title name box in there, this can be modified to have a different background color" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
