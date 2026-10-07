@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="Put a title name box in there, this can be modified to have a different background color">
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791293328551</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Put a title name box in there, this can be modified to have a different background color">
+      <option name="closed" value="true" />
+      <created>1791301814854</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1791301814854</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +149,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Initial commit times 2" />
     <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
-    <option name="LAST_COMMIT_MESSAGE" value="Put a title name box in there, this can be modified to have a different background color" />
+    <MESSAGE value="Got the top bar to actually be able to move and minimize and everything" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got the top bar to actually be able to move and minimize and everything" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
