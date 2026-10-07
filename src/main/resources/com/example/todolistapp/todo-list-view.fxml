@@ -3,18 +3,19 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox centerShape="false" fillWidth="false" prefHeight="411.0" prefWidth="385.0" spacing="20.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.TodoListController">
+<VBox centerShape="false" fillWidth="false" prefHeight="451.0" prefWidth="429.0" spacing="20.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.TodoListController">
    <children>
-      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" onMouseDragged="#onTitleBarDragged" onMousePressed="#onTitleBarPressed" prefHeight="30.0" prefWidth="382.0">
+      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" onMouseDragged="#onTitleBarDragged" onMousePressed="#onTitleBarPressed" prefHeight="50.0" prefWidth="429.0">
          <VBox.margin>
             <Insets />
          </VBox.margin>
          <children>
-            <TextField alignment="TOP_LEFT" prefHeight="26.0" prefWidth="282.0" promptText="Enter ToDo list name...">
+            <TextField fx:id="titleField" alignment="TOP_LEFT" onAction="#onTitleEntered" prefHeight="26.0" prefWidth="323.0" promptText="Enter ToDo list name..." style="-fx-background-color: grey;">
                <font>
-                  <Font name="Arial" size="12.0" />
+                  <Font name="Arial Black" size="12.0" />
                </font>
             </TextField>
             <Button fx:id="minButton" mnemonicParsing="false" onAction="#onMinimize" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: Transparent;" text="—" textFill="WHITE" />
@@ -26,11 +27,29 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="378.0">
+      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="425.0">
          <children>
-            <Button alignment="TOP_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="25.0" text="+" textAlignment="CENTER" textFill="RED" />
+            <TextField prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: grey; -fx-border-color: Black;" text="Enter your task here" />
+            <Button alignment="TOP_RIGHT" ellipsisString="+" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="19.0" prefWidth="30.0" style="-fx-background-color: grey;" text="+" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </HBox>
-      <AnchorPane prefHeight="307.0" prefWidth="382.0" />
+      <Line endX="100.0" startX="-100.0" VBox.vgrow="NEVER" />
+      <TextField prefHeight="26.0" prefWidth="427.0" VBox.vgrow="NEVER" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
+      <Line endX="100.0" startX="-100.0" />
    </children>
 </VBox>

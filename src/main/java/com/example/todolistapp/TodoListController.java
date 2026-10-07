@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import java.util.prefs.Preferences;
 
 public class TodoListController {
 
@@ -42,5 +44,24 @@ public class TodoListController {
     @FXML
     private void onClose() {
         ((Stage) closeButton.getScene().getWindow()).close();
+    }
+
+    //Title field (on enter keep that title)
+    @FXML private TextField titleField;
+
+    private final Preferences prefs = Preferences.userNodeForPackage(TodoListController.class);
+
+    @FXML
+    private void initialize() {
+        titleField.setText(prefs.get("listName", ""));
+    }
+
+    @FXML
+    private void onTitleEntered() {
+        String text = titleField.getText().trim();
+        if (text.isEmpty()) return;
+
+        prefs.put("listName", text);
+        titleField.getParent().requestFocus(); // drops the cursor out of the field
     }
 }
