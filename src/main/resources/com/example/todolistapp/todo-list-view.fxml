@@ -31,6 +31,6 @@
             <Button alignment="TOP_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="25.0" text="+" textAlignment="CENTER" textFill="RED" />
          </children>
       </HBox>
-      <AnchorPane prefHeight="94.0" prefWidth="382.0" />
+      <AnchorPane prefHeight="307.0" prefWidth="382.0" />
    </children>
 </VBox>
