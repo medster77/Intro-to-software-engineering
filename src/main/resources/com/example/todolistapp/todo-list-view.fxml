@@ -6,14 +6,14 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox centerShape="false" fillWidth="false" prefHeight="451.0" prefWidth="429.0" spacing="20.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.TodoListController">
+<VBox centerShape="false" fillWidth="false" prefHeight="678.0" prefWidth="642.0" spacing="20.0" style="-fx-background-color: #fffdf5; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.TodoListController">
    <children>
-      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" onMouseDragged="#onTitleBarDragged" onMousePressed="#onTitleBarPressed" prefHeight="50.0" prefWidth="429.0">
+      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" onMouseDragged="#onTitleBarDragged" onMousePressed="#onTitleBarPressed" prefHeight="48.0" prefWidth="642.0" style="-fx-background-color: #000000;">
          <VBox.margin>
             <Insets />
          </VBox.margin>
          <children>
-            <TextField fx:id="titleField" alignment="TOP_LEFT" onAction="#onTitleEntered" prefHeight="26.0" prefWidth="323.0" promptText="Enter ToDo list name..." style="-fx-background-color: grey;">
+            <TextField fx:id="titleField" alignment="TOP_LEFT" onAction="#onTitleEntered" prefHeight="26.0" prefWidth="539.0" promptText="Enter ToDo list name..." style="-fx-background-color: grey;">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
@@ -27,29 +27,121 @@
             </Button>
          </children>
       </HBox>
-      <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="425.0">
+      <HBox alignment="TOP_RIGHT" prefHeight="34.0" prefWidth="637.0" style="-fx-background-color: #fffdf5;">
          <children>
-            <TextField prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: grey; -fx-border-color: Black;" text="Enter your task here" />
-            <Button alignment="TOP_RIGHT" ellipsisString="+" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="19.0" prefWidth="30.0" style="-fx-background-color: grey;" text="+" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="TOP_RIGHT" ellipsisString="+" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: grey;" text="+" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
+            <TextField prefHeight="30.0" prefWidth="616.0" style="-fx-background-color: grey; -fx-border-color: Black;" text="Enter your task here" />
          </children>
       </HBox>
-      <Line endX="100.0" startX="-100.0" VBox.vgrow="NEVER" />
-      <TextField prefHeight="26.0" prefWidth="427.0" VBox.vgrow="NEVER" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
-      <Line endX="100.0" startX="-100.0" />
+      <VBox prefHeight="555.0" prefWidth="643.0" style="-fx-background-color: #fffdf5;">
+         <children>
+            <HBox prefHeight="26.0" prefWidth="640.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="641.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children></HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0">
+               <children>
+                  <Line endX="540.0" startX="-100.0" stroke="#0f9fd3" />
+               </children>
+            </HBox>
+         </children></VBox>
    </children>
 </VBox>
