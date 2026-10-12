@@ -1,11 +1,17 @@
 package com.example.todolistapp;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.control.TextField;
+import java.io.IOException;
 import java.util.prefs.Preferences;
 
 public class TodoListController {
@@ -63,5 +69,24 @@ public class TodoListController {
 
         prefs.put("listName", text);
         titleField.getParent().requestFocus(); // drops the cursor out of the field
+    }
+
+    //Add task button (+): opens the "New task" window
+    @FXML
+    private void onAddTask() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-task-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        scene.setFill(Color.TRANSPARENT);
+
+        Stage dialog = new Stage(StageStyle.TRANSPARENT);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(titleField.getScene().getWindow());
+        dialog.setScene(scene);
+        dialog.showAndWait();
+
+        AddTaskController.TaskData task = loader.<AddTaskController>getController().getResult();
+        if (task != null) {
+            // task.name() and task.repeat() (NONE, DAILY, WEEKLY, MONTHLY) are ready to use here
+        }
     }
 }

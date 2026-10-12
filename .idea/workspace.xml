@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="10/7">
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="10/12">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/AddTaskController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" afterDir="false" />
     </list>
@@ -12,6 +13,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -150,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791383964979</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="10/12">
+      <option name="closed" value="true" />
+      <created>1791818183528</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1791818183528</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +201,9 @@
     <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
     <MESSAGE value="Got the top bar to actually be able to move and minimize and everything" />
     <MESSAGE value="10/7" />
-    <option name="LAST_COMMIT_MESSAGE" value="10/7" />
+    <MESSAGE value="10/12" />
+    <MESSAGE value="Made the layout look a little nicer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made the layout look a little nicer" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

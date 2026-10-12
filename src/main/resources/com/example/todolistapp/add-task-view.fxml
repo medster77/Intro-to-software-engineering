@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fillWidth="true" prefWidth="420.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-color: #3A3A3A; -fx-border-width: 2; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.AddTaskController">
+   <fx:define>
+      <ToggleGroup fx:id="repeatGroup" />
+   </fx:define>
+   <children>
+
+      <!-- Header (draggable) -->
+      <HBox fx:id="dragBar" alignment="CENTER_LEFT" onMouseDragged="#onDragged" onMousePressed="#onDragPressed" prefHeight="48.0" style="-fx-background-color: #171717; -fx-background-radius: 13 13 0 0;">
+         <padding>
+            <Insets bottom="0.0" left="18.0" right="10.0" top="0.0" />
+         </padding>
+         <children>
+            <Label style="-fx-text-fill: #ECECEC; -fx-font-family: 'Segoe UI'; -fx-font-size: 15px; -fx-font-weight: bold;" text="New task" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+            <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="32.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-text-fill: #F07178; -fx-font-size: 13px; -fx-cursor: hand;" text="✕" />
+         </children>
+      </HBox>
+
+      <!-- Form -->
+      <VBox spacing="8.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <Label style="-fx-text-fill: #B4B4B4; -fx-font-size: 12px;" text="Task name" />
+            <TextField fx:id="taskNameField" onAction="#onSave" prefHeight="38.0" promptText="Take out the trash" style="-fx-background-color: #2F2F2F; -fx-background-radius: 8; -fx-text-fill: #ECECEC; -fx-prompt-text-fill: #8E8EA0; -fx-font-size: 14px; -fx-padding: 0 12 0 12; -fx-highlight-fill: #10A37F;" />
+            <Label fx:id="errorLabel" managed="false" style="-fx-text-fill: #F07178; -fx-font-size: 12px;" text="Enter a task name" visible="false" />
+
+            <Label style="-fx-text-fill: #B4B4B4; -fx-font-size: 12px;" text="Repeat">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox spacing="8.0">
+               <children>
+                  <ToggleButton maxWidth="Infinity" mnemonicParsing="false" prefHeight="36.0" selected="true" text="Never" toggleGroup="$repeatGroup" userData="NONE" HBox.hgrow="ALWAYS" />
+                  <ToggleButton maxWidth="Infinity" mnemonicParsing="false" prefHeight="36.0" text="Daily" toggleGroup="$repeatGroup" userData="DAILY" HBox.hgrow="ALWAYS" />
+                  <ToggleButton maxWidth="Infinity" mnemonicParsing="false" prefHeight="36.0" text="Weekly" toggleGroup="$repeatGroup" userData="WEEKLY" HBox.hgrow="ALWAYS" />
+                  <ToggleButton maxWidth="Infinity" mnemonicParsing="false" prefHeight="36.0" text="Monthly" toggleGroup="$repeatGroup" userData="MONTHLY" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+               <VBox.margin>
+                  <Insets top="22.0" />
+               </VBox.margin>
+               <children>
+                  <Button cancelButton="true" mnemonicParsing="false" onAction="#onCancel" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: #3A3A3A; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #B4B4B4; -fx-font-size: 13px; -fx-cursor: hand;" text="Cancel" />
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#onSave" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #10A37F; -fx-background-radius: 8; -fx-text-fill: #FFFFFF; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;" text="Add task" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
