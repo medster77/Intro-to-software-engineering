@@ -31,7 +31,7 @@
       </HBox>
 
       <!-- Ruled area: 21 lines, same as the original -->
-      <VBox prefHeight="546.0" style="-fx-background-color: #1B1B1B; -fx-background-radius: 10; -fx-border-color: #303030; -fx-border-width: 1; -fx-border-radius: 10;">
+      <VBox fx:id="taskList" prefHeight="546.0" style="-fx-background-color: #1B1B1B; -fx-background-radius: 10; -fx-border-color: #303030; -fx-border-width: 1; -fx-border-radius: 10;">
          <VBox.margin>
             <Insets bottom="16.0" left="16.0" right="16.0" top="0.0" />
          </VBox.margin>

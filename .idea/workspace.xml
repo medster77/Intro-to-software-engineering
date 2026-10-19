@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="10/12">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/AddTaskController.java" afterDir="false" />
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="10/7">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,14 +14,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -42,6 +40,69 @@
         <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0000095902509654" />
+      <entry key="MS500" value="1.099167211885832" />
+      <entry key="S2" value="1.5875080334976714" />
+      <entry key="S5" value="2.027457477654674" />
+      <entry key="S10" value="2.4080459238986025" />
+      <entry key="S30" value="3.8488627352757594" />
+      <entry key="S60" value="6.9095297450330575" />
+      <entry key="M2" value="12.09566093010055" />
+      <entry key="M5" value="19.072215841953973" />
+      <entry key="M10" value="22.8458807636083" />
+      <entry key="M15" value="24.376303980599907" />
+      <entry key="M30" value="26.083219941827387" />
+      <entry key="H1" value="27.01297802910704" />
+      <entry key="H2" value="27.49899971234469" />
+      <entry key="H4" value="27.747583955277797" />
+      <entry key="D1" value="27.957660757749846" />
+      <entry key="W1" value="27.99394487665565" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="2.587292729566787E-119" />
+      <entry key="S2" value="2.2553367259775003E-30" />
+      <entry key="S5" value="1.3844732112326501E-12" />
+      <entry key="S10" value="1.1766363972071617E-6" />
+      <entry key="S30" value="0.010557167840576026" />
+      <entry key="S60" value="0.10274807949823699" />
+      <entry key="M2" value="0.32054341281367327" />
+      <entry key="M5" value="0.6343876834354412" />
+      <entry key="M10" value="0.7964845782784763" />
+      <entry key="M15" value="0.8592474412711724" />
+      <entry key="M30" value="0.9269560082717909" />
+      <entry key="H1" value="0.9627855463558803" />
+      <entry key="H2" value="0.9812163606238326" />
+      <entry key="H4" value="0.990563658037096" />
+      <entry key="D1" value="0.9984210567911886" />
+      <entry key="W1" value="0.999774283898666" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.0027621368215155675" />
+      <entry key="MS500" value="0.3234981137611734" />
+      <entry key="S2" value="1.1177364025640248" />
+      <entry key="S5" value="1.7534610570789202" />
+      <entry key="S10" value="2.237530401050847" />
+      <entry key="S30" value="3.7565601948773124" />
+      <entry key="S60" value="6.920377766029229" />
+      <entry key="M2" value="12.340201792254247" />
+      <entry key="M5" value="19.66132592190083" />
+      <entry key="M10" value="23.615981924058097" />
+      <entry key="M15" value="25.2169887759097" />
+      <entry key="M30" value="27.000364707223635" />
+      <entry key="H1" value="27.970716478099135" />
+      <entry key="H2" value="28.47765593889403" />
+      <entry key="H4" value="28.736858241577636" />
+      <entry key="D1" value="28.955865613184024" />
+      <entry key="W1" value="28.993688242479458" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7,
@@ -158,15 +219,7 @@
       <option name="project" value="LOCAL" />
       <updated>1791383964979</updated>
     </task>
-    <task id="LOCAL-00009" summary="10/12">
-      <option name="closed" value="true" />
-      <created>1791818183528</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1791818183528</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,9 +254,7 @@
     <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
     <MESSAGE value="Got the top bar to actually be able to move and minimize and everything" />
     <MESSAGE value="10/7" />
-    <MESSAGE value="10/12" />
-    <MESSAGE value="Made the layout look a little nicer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the layout look a little nicer" />
+    <option name="LAST_COMMIT_MESSAGE" value="10/7" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

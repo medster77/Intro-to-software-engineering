@@ -13,6 +13,12 @@ import javafx.stage.StageStyle;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.prefs.Preferences;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TodoListController {
 
@@ -86,7 +92,81 @@ public class TodoListController {
 
         AddTaskController.TaskData task = loader.<AddTaskController>getController().getResult();
         if (task != null) {
-            // task.name() and task.repeat() (NONE, DAILY, WEEKLY, MONTHLY) are ready to use here
+            //find the first empty line
+            int slotIndex = -1;
+
+            for (int i = 0; i < taskList.getChildren().size(); i++) {
+                HBox row = (HBox) taskList.getChildren().get(i);
+
+                if (row.getChildren().isEmpty()) {
+                    slotIndex = i;
+                    break;
+                }
+            }
+
+            if (slotIndex == -1) {
+                System.out.println("No empty notebook lines left!");
+                return;
+            }
+
+            // create a checkbox for the task
+            CheckBox taskCheckBox = new CheckBox();
+            Text taskText = new Text(task.name());
+
+            // Style the task text
+            taskText.setStyle("-fx-fill: #ECECEC;" + "-fx-font-size: 14px;");
+
+            taskCheckBox.setGraphic(taskText);
+            taskCheckBox.setStyle("-fx-cursor: hand;");
+
+            // Cross out the text when checked
+            taskCheckBox.setOnAction(e -> {
+                taskText.setStrikethrough(taskCheckBox.isSelected());
+
+                // Move completed tasks to the bottom
+                reorderTaskRows();
+            });
+            //adds task to the next line
+            HBox taskRow = (HBox) taskList.getChildren().get(slotIndex);
+
+            taskRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+            taskRow.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
+            taskRow.getChildren().add(taskCheckBox);
+
+
+        }
+    }
+    @FXML
+    private VBox taskList;
+    private void reorderTaskRows() {
+        ArrayList<CheckBox> tasks = new ArrayList<>();
+
+        // get all tasks
+        for (javafx.scene.Node node : taskList.getChildren()) {
+            HBox row = (HBox) node;
+
+            for (javafx.scene.Node child : row.getChildren()) {
+                if (child instanceof CheckBox checkBox) {
+                    tasks.add(checkBox);
+                }
+            }
+        }
+
+        // Unchecked tasks first, completed tasks last
+        tasks.sort(Comparator.comparing(CheckBox::isSelected));
+
+        // Clear rows without deleting lines
+        for (javafx.scene.Node node : taskList.getChildren()) {
+            ((HBox) node).getChildren().clear();
+        }
+
+        // Put the tasks back in the new order
+        for (int i = 0; i < tasks.size(); i++) {
+            HBox row = (HBox) taskList.getChildren().get(i);
+
+            row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+            row.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
+            row.getChildren().add(tasks.get(i));
         }
     }
 }
