@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class TodoListController {
 
@@ -136,6 +137,35 @@ public class TodoListController {
 
         }
     }
+    //Completed tasks button (✓): opens a window listing every checked-off task
+    @FXML
+    private void onShowCompleted() throws IOException {
+        List<String> completed = new ArrayList<>();
+
+        for (Node node : taskList.getChildren()) {
+            HBox row = (HBox) node;
+
+            for (Node child : row.getChildren()) {
+                if (child instanceof CheckBox checkBox
+                        && checkBox.isSelected()
+                        && checkBox.getGraphic() instanceof Text taskText) {
+                    completed.add(taskText.getText());
+                }
+            }
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("completed-tasks-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        scene.setFill(Color.TRANSPARENT);
+        loader.<CompletedTasksController>getController().setTasks(completed);
+
+        Stage dialog = new Stage(StageStyle.TRANSPARENT);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(titleField.getScene().getWindow());
+        dialog.setScene(scene);
+        dialog.showAndWait();
+    }
+
     @FXML
     private VBox taskList;
     private void reorderTaskRows() {

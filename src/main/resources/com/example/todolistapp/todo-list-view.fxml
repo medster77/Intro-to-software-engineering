@@ -26,7 +26,12 @@
          </padding>
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddTask" prefHeight="38.0" prefWidth="44.0" style="-fx-background-color: #10A37F; -fx-background-radius: 10 0 0 10; -fx-text-fill: #FFFFFF; -fx-font-size: 20px; -fx-cursor: hand;" text="+" />
-            <Label alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="38.0" prefWidth="535.0" style="-fx-background-color: #2A2A2A; -fx-background-radius: 0 10 10 0; -fx-text-fill: #8E8EA0; -fx-font-size: 14px; -fx-padding: 0 12 0 12;" text="Press + to add a new task" HBox.hgrow="ALWAYS" />
+            <Label alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="38.0" prefWidth="522.0" style="-fx-background-color: #2A2A2A; -fx-background-radius: 0; -fx-text-fill: #8E8EA0; -fx-font-size: 14px; -fx-padding: 0 12 0 12;" text="Press + to add a new task" HBox.hgrow="ALWAYS" />
+            <Button fx:id="completedButton" mnemonicParsing="false" onAction="#onShowCompleted" prefHeight="38.0" prefWidth="44.0" style="-fx-background-color: #2F2F2F; -fx-background-radius: 0 10 10 0; -fx-text-fill: #10A37F; -fx-font-size: 18px; -fx-cursor: hand;" text="✓">
+               <tooltip>
+                  <Tooltip text="View completed tasks" />
+               </tooltip>
+            </Button>
          </children>
       </HBox>
 

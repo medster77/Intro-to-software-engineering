@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fillWidth="true" prefHeight="460.0" prefWidth="420.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-color: #3A3A3A; -fx-border-width: 2; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.CompletedTasksController">
+   <children>
+
+      <!-- Header (draggable) -->
+      <HBox fx:id="dragBar" alignment="CENTER_LEFT" onMouseDragged="#onDragged" onMousePressed="#onDragPressed" prefHeight="48.0" minHeight="48.0" style="-fx-background-color: #171717; -fx-background-radius: 13 13 0 0;">
+         <padding>
+            <Insets bottom="0.0" left="18.0" right="10.0" top="0.0" />
+         </padding>
+         <children>
+            <Label maxWidth="Infinity" style="-fx-text-fill: #ECECEC; -fx-font-family: 'Segoe UI'; -fx-font-size: 15px; -fx-font-weight: bold;" text="Completed tasks" HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#onClose" prefHeight="32.0" prefWidth="34.0" style="-fx-background-color: transparent; -fx-text-fill: #F07178; -fx-font-size: 13px; -fx-cursor: hand;" text="✕" />
+         </children>
+      </HBox>
+
+      <!-- Body -->
+      <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="16.0" />
+         </padding>
+         <children>
+            <Label fx:id="countLabel" style="-fx-text-fill: #B4B4B4; -fx-font-size: 12px;" text="0 tasks completed" />
+
+            <Label fx:id="emptyLabel" style="-fx-text-fill: #8E8EA0; -fx-font-size: 14px;" text="Nothing checked off yet." />
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="completedList" spacing="6.0" style="-fx-background-color: transparent;" />
+               </content>
+            </ScrollPane>
+
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#onClose" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #10A37F; -fx-background-radius: 8; -fx-text-fill: #FFFFFF; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;" text="Close" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
