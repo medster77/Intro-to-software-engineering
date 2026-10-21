@@ -19,7 +19,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.time.LocalDate;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class TodoListController {
 
@@ -64,9 +74,29 @@ public class TodoListController {
 
     private final Preferences prefs = Preferences.userNodeForPackage(TodoListController.class);
 
+    private Timeline repeatChecker;
+
+    /** Extra info kept on every task's checkbox (via setUserData). */
+    private static class TaskMeta {
+        final AddTaskController.Repeat repeat;
+        LocalDate completedOn;   // null while the task is unchecked
+
+        TaskMeta(AddTaskController.Repeat repeat, LocalDate completedOn) {
+            this.repeat = repeat;
+            this.completedOn = completedOn;
+        }
+    }
+
     @FXML
     private void initialize() {
         titleField.setText(prefs.get("listName", ""));
+        loadTasks();
+        refreshRepeatingTasks();   // bring back anything that is due again
+
+        // Re-check every minute so tasks also reappear if the app is left open past midnight
+        repeatChecker = new Timeline(new KeyFrame(Duration.minutes(1), e -> refreshRepeatingTasks()));
+        repeatChecker.setCycleCount(Animation.INDEFINITE);
+        repeatChecker.play();
     }
 
     @FXML
@@ -92,51 +122,181 @@ public class TodoListController {
         dialog.showAndWait();
 
         AddTaskController.TaskData task = loader.<AddTaskController>getController().getResult();
-        if (task != null) {
-            //find the first empty line
-            int slotIndex = -1;
-
-            for (int i = 0; i < taskList.getChildren().size(); i++) {
-                HBox row = (HBox) taskList.getChildren().get(i);
-
-                if (row.getChildren().isEmpty()) {
-                    slotIndex = i;
-                    break;
-                }
-            }
-
-            if (slotIndex == -1) {
-                System.out.println("No empty notebook lines left!");
-                return;
-            }
-
-            // create a checkbox for the task
-            CheckBox taskCheckBox = new CheckBox();
-            Text taskText = new Text(task.name());
-
-            // Style the task text
-            taskText.setStyle("-fx-fill: #ECECEC;" + "-fx-font-size: 14px;");
-
-            taskCheckBox.setGraphic(taskText);
-            taskCheckBox.setStyle("-fx-cursor: hand;");
-
-            // Cross out the text when checked
-            taskCheckBox.setOnAction(e -> {
-                taskText.setStrikethrough(taskCheckBox.isSelected());
-
-                // Move completed tasks to the bottom
-                reorderTaskRows();
-            });
-            //adds task to the next line
-            HBox taskRow = (HBox) taskList.getChildren().get(slotIndex);
-
-            taskRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-            taskRow.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
-            taskRow.getChildren().add(taskCheckBox);
-
-
+        if (task != null && addTaskToList(task.name(), task.repeat(), false, null)) {
+            saveTasks();
         }
     }
+
+    /** Puts a task into the first empty notebook line. Returns false if every line is taken. */
+    private boolean addTaskToList(String name, AddTaskController.Repeat repeat, boolean done, LocalDate completedOn) {
+        //find the first empty line
+        int slotIndex = -1;
+
+        for (int i = 0; i < taskList.getChildren().size(); i++) {
+            HBox row = (HBox) taskList.getChildren().get(i);
+
+            if (row.getChildren().isEmpty()) {
+                slotIndex = i;
+                break;
+            }
+        }
+
+        if (slotIndex == -1) {
+            System.out.println("No empty notebook lines left!");
+            return false;
+        }
+
+        // create a checkbox for the task
+        CheckBox taskCheckBox = new CheckBox();
+        Text taskText = new Text(name);
+
+        // Style the task text
+        taskText.setStyle("-fx-fill: #ECECEC;" + "-fx-font-size: 14px;");
+        taskText.setStrikethrough(done);
+
+        taskCheckBox.setSelected(done);
+        // a task that is already done but has no date yet counts as finished today
+        TaskMeta meta = new TaskMeta(repeat, done ? (completedOn != null ? completedOn : LocalDate.now()) : null);
+        taskCheckBox.setUserData(meta);     // remembered so it can be saved and rescheduled
+        taskCheckBox.setGraphic(taskText);
+        taskCheckBox.setStyle("-fx-cursor: hand;");
+
+        // Cross out the text when checked
+        taskCheckBox.setOnAction(e -> {
+            taskText.setStrikethrough(taskCheckBox.isSelected());
+            meta.completedOn = taskCheckBox.isSelected() ? LocalDate.now() : null;
+
+            // Move completed tasks to the bottom
+            reorderTaskRows();
+            saveTasks();
+        });
+
+        //adds task to the next line
+        HBox taskRow = (HBox) taskList.getChildren().get(slotIndex);
+
+        taskRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        taskRow.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
+        taskRow.getChildren().add(taskCheckBox);
+        return true;
+    }
+
+    //Saving: one task per line ->  done<TAB>repeat<TAB>completedOn<TAB>name
+    // Lives in %APPDATA%\TodoListApp\tasks.txt so it still works once packaged as an .exe
+    private static Path saveFile() {
+        String appData = System.getenv("APPDATA");
+        Path base = (appData != null)
+                ? Paths.get(appData)
+                : Paths.get(System.getProperty("user.home"), ".config");
+        return base.resolve("TodoListApp").resolve("tasks.txt");
+    }
+
+    private void saveTasks() {
+        List<String> lines = new ArrayList<>();
+
+        for (Node node : taskList.getChildren()) {
+            HBox row = (HBox) node;
+
+            for (Node child : row.getChildren()) {
+                if (child instanceof CheckBox checkBox && checkBox.getGraphic() instanceof Text taskText) {
+                    TaskMeta meta = (TaskMeta) checkBox.getUserData();
+                    String completedOn = (meta.completedOn != null) ? meta.completedOn.toString() : "";
+                    String name = taskText.getText().replace('\t', ' ').replace('\n', ' ');
+                    lines.add((checkBox.isSelected() ? "1" : "0") + "\t" + meta.repeat
+                            + "\t" + completedOn + "\t" + name);
+                }
+            }
+        }
+
+        try {
+            Path file = saveFile();
+            Files.createDirectories(file.getParent());
+
+            // write to a temp file first so a crash mid-save can't corrupt the real one
+            Path temp = file.resolveSibling("tasks.txt.tmp");
+            Files.write(temp, lines, StandardCharsets.UTF_8);
+            Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            System.err.println("Could not save tasks: " + ex.getMessage());
+        }
+    }
+
+    private void loadTasks() {
+        Path file = saveFile();
+        if (!Files.exists(file)) return;
+
+        try {
+            for (String line : Files.readAllLines(file, StandardCharsets.UTF_8)) {
+                String[] parts = line.split("\t", 4);
+                if (parts.length < 3) continue;
+
+                // new format has 4 columns; the older one had no date column
+                String name = (parts.length == 4) ? parts[3] : parts[2];
+                String dateText = (parts.length == 4) ? parts[2] : "";
+                if (name.isBlank()) continue;
+
+                LocalDate completedOn = null;
+                try {
+                    if (!dateText.isBlank()) completedOn = LocalDate.parse(dateText);
+                } catch (java.time.format.DateTimeParseException ex) {
+                    completedOn = null;
+                }
+
+                AddTaskController.Repeat repeat;
+                try {
+                    repeat = AddTaskController.Repeat.valueOf(parts[1]);
+                } catch (IllegalArgumentException ex) {
+                    repeat = AddTaskController.Repeat.NONE;
+                }
+
+                addTaskToList(name, repeat, parts[0].equals("1"), completedOn);
+            }
+        } catch (IOException ex) {
+            System.err.println("Could not load tasks: " + ex.getMessage());
+        }
+    }
+
+    //Scheduling: a checked repeating task comes back (unchecked) once its period has passed.
+    //  Daily   -> the day after it was completed
+    //  Weekly  -> 7 days after
+    //  Monthly -> same date next month
+    private static boolean isDue(TaskMeta meta) {
+        if (meta.completedOn == null) return false;
+
+        LocalDate comesBack = switch (meta.repeat) {
+            case DAILY   -> meta.completedOn.plusDays(1);
+            case WEEKLY  -> meta.completedOn.plusWeeks(1);
+            case MONTHLY -> meta.completedOn.plusMonths(1);
+            case NONE    -> null;
+        };
+        return comesBack != null && !LocalDate.now().isBefore(comesBack);
+    }
+
+    private void refreshRepeatingTasks() {
+        boolean changed = false;
+
+        for (Node node : taskList.getChildren()) {
+            HBox row = (HBox) node;
+
+            for (Node child : row.getChildren()) {
+                if (child instanceof CheckBox checkBox
+                        && checkBox.isSelected()
+                        && checkBox.getGraphic() instanceof Text taskText
+                        && checkBox.getUserData() instanceof TaskMeta meta
+                        && isDue(meta)) {
+                    checkBox.setSelected(false);
+                    taskText.setStrikethrough(false);
+                    meta.completedOn = null;
+                    changed = true;
+                }
+            }
+        }
+
+        if (changed) {
+            reorderTaskRows();   // moves the revived tasks back up with the unchecked ones
+            saveTasks();
+        }
+    }
+
     //Completed tasks button (✓): opens a window listing every checked-off task
     @FXML
     private void onShowCompleted() throws IOException {

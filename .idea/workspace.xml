@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="">
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="Made the new completed folder!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/todo-list-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791383964979</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Made the new completed folder!!">
+      <option name="closed" value="true" />
+      <created>1792616810709</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1792616810709</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +267,8 @@
     <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
     <MESSAGE value="Got the top bar to actually be able to move and minimize and everything" />
     <MESSAGE value="10/7" />
-    <option name="LAST_COMMIT_MESSAGE" value="10/7" />
+    <MESSAGE value="Made the new completed folder!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made the new completed folder!!" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
