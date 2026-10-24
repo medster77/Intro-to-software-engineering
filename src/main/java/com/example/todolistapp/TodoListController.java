@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -150,6 +151,33 @@ public class TodoListController {
         CheckBox taskCheckBox = new CheckBox();
         Text taskText = new Text(name);
 
+        // Create a delete button for this task
+        Button deleteButton = new Button("×");
+        deleteButton.setStyle(
+                "-fx-background-color: transparent;" +
+                        "-fx-text-fill: #ff6b6b;" +
+                        "-fx-font-size: 18px;" +
+                        "-fx-cursor: hand;"
+        );
+        deleteButton.setFocusTraversable(false);
+        deleteButton.setUserData(taskCheckBox);
+
+        deleteButton.setOnAction(e -> {
+            // Remove this task from its notebook line
+            for (Node node : taskList.getChildren()) {
+                HBox row = (HBox) node;
+
+                if (row.getChildren().contains(taskCheckBox)) {
+                    row.getChildren().clear();
+                    break;
+                }
+            }
+
+            // Rearrange remaining tasks and save the changes
+            reorderTaskRows();
+            saveTasks();
+        });
+
         // Style the task text
         taskText.setStyle("-fx-fill: #ECECEC;" + "-fx-font-size: 14px;");
         taskText.setStrikethrough(done);
@@ -161,12 +189,26 @@ public class TodoListController {
         taskCheckBox.setGraphic(taskText);
         taskCheckBox.setStyle("-fx-cursor: hand;");
 
-        // Cross out the text when checked
+        // Cross out the text when checked and uncrosses when unchecked
+
         taskCheckBox.setOnAction(e -> {
             taskText.setStrikethrough(taskCheckBox.isSelected());
-            meta.completedOn = taskCheckBox.isSelected() ? LocalDate.now() : null;
 
-            // Move completed tasks to the bottom
+            meta.completedOn = taskCheckBox.isSelected()
+                    ? LocalDate.now()
+                    : null;
+
+            // Archive completed one-time tasks permanently.
+            if (taskCheckBox.isSelected()
+                    && meta.repeat == AddTaskController.Repeat.NONE) {
+                archiveCompletedTask(taskText.getText());
+            }
+
+            // When a repeating task is unchecked, remove its archived entry.
+            if (!taskCheckBox.isSelected()) {
+                removeCompletedTask(taskText.getText());
+            }
+
             reorderTaskRows();
             saveTasks();
         });
@@ -176,7 +218,12 @@ public class TodoListController {
 
         taskRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         taskRow.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
-        taskRow.getChildren().add(taskCheckBox);
+        taskRow.setSpacing(8);
+
+        taskCheckBox.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(taskCheckBox, Priority.ALWAYS);
+
+        taskRow.getChildren().addAll(taskCheckBox, deleteButton);
         return true;
     }
 
@@ -187,7 +234,52 @@ public class TodoListController {
         Path base = (appData != null)
                 ? Paths.get(appData)
                 : Paths.get(System.getProperty("user.home"), ".config");
+
         return base.resolve("TodoListApp").resolve("tasks.txt");
+    }
+
+    private static Path completedSaveFile() {
+        String appData = System.getenv("APPDATA");
+        Path base = (appData != null)
+                ? Paths.get(appData)
+                : Paths.get(System.getProperty("user.home"), ".config");
+
+        return base.resolve("TodoListApp").resolve("completed.txt");
+    }
+
+    private List<String> loadCompletedTasks() {
+        Path file = completedSaveFile();
+
+        try {
+            if (Files.exists(file)) {
+                return new ArrayList<>(
+                        Files.readAllLines(file, StandardCharsets.UTF_8)
+                );
+            }
+        } catch (IOException ex) {
+            System.err.println("Could not load completed tasks: " + ex.getMessage());
+        }
+
+        return new ArrayList<>();
+    }
+
+    private void archiveCompletedTask(String name) {
+        List<String> completed = loadCompletedTasks();
+
+        // Avoid archiving the same task name twice.
+        if (completed.contains(name)) {
+            return;
+        }
+
+        completed.add(name);
+
+        try {
+            Path file = completedSaveFile();
+            Files.createDirectories(file.getParent());
+            Files.write(file, completed, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            System.err.println("Could not archive completed task: " + ex.getMessage());
+        }
     }
 
     private void saveTasks() {
@@ -220,23 +312,28 @@ public class TodoListController {
         }
     }
 
+
     private void loadTasks() {
         Path file = saveFile();
         if (!Files.exists(file)) return;
+
+        boolean removedCompletedTasks = false;
 
         try {
             for (String line : Files.readAllLines(file, StandardCharsets.UTF_8)) {
                 String[] parts = line.split("\t", 4);
                 if (parts.length < 3) continue;
 
-                // new format has 4 columns; the older one had no date column
                 String name = (parts.length == 4) ? parts[3] : parts[2];
                 String dateText = (parts.length == 4) ? parts[2] : "";
+
                 if (name.isBlank()) continue;
 
                 LocalDate completedOn = null;
                 try {
-                    if (!dateText.isBlank()) completedOn = LocalDate.parse(dateText);
+                    if (!dateText.isBlank()) {
+                        completedOn = LocalDate.parse(dateText);
+                    }
                 } catch (java.time.format.DateTimeParseException ex) {
                     completedOn = null;
                 }
@@ -248,8 +345,23 @@ public class TodoListController {
                     repeat = AddTaskController.Repeat.NONE;
                 }
 
-                addTaskToList(name, repeat, parts[0].equals("1"), completedOn);
+                boolean done = parts[0].equals("1");
+
+                // Remove completed, non repeat tasks from the active list and archive to completed file
+                if (done && repeat == AddTaskController.Repeat.NONE) {
+                    archiveCompletedTask(name);
+                    removedCompletedTasks = true;
+                    continue;
+                }
+
+                addTaskToList(name, repeat, done, completedOn);
             }
+
+            // Persist the cleaned active list.
+            if (removedCompletedTasks) {
+                saveTasks();
+            }
+
         } catch (IOException ex) {
             System.err.println("Could not load tasks: " + ex.getMessage());
         }
@@ -300,23 +412,30 @@ public class TodoListController {
     //Completed tasks button (✓): opens a window listing every checked-off task
     @FXML
     private void onShowCompleted() throws IOException {
-        List<String> completed = new ArrayList<>();
+        // Start with tasks saved in the permanent archive.
+        List<String> completed = loadCompletedTasks();
 
+        // Also show checked repeating tasks that are still in the notebook.
         for (Node node : taskList.getChildren()) {
             HBox row = (HBox) node;
 
             for (Node child : row.getChildren()) {
                 if (child instanceof CheckBox checkBox
                         && checkBox.isSelected()
-                        && checkBox.getGraphic() instanceof Text taskText) {
+                        && checkBox.getGraphic() instanceof Text taskText
+                        && checkBox.getUserData() instanceof TaskMeta meta
+                        && meta.repeat != AddTaskController.Repeat.NONE) {
                     completed.add(taskText.getText());
                 }
             }
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("completed-tasks-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("completed-tasks-view.fxml")
+        );
         Scene scene = new Scene(loader.load());
         scene.setFill(Color.TRANSPARENT);
+
         loader.<CompletedTasksController>getController().setTasks(completed);
 
         Stage dialog = new Stage(StageStyle.TRANSPARENT);
@@ -330,14 +449,19 @@ public class TodoListController {
     private VBox taskList;
     private void reorderTaskRows() {
         ArrayList<CheckBox> tasks = new ArrayList<>();
+        java.util.Map<CheckBox, Button> deleteButtons =
+                new java.util.HashMap<>();
 
-        // get all tasks
-        for (javafx.scene.Node node : taskList.getChildren()) {
+        // Collect each checkbox and its matching delete button
+        for (Node node : taskList.getChildren()) {
             HBox row = (HBox) node;
 
-            for (javafx.scene.Node child : row.getChildren()) {
+            for (Node child : row.getChildren()) {
                 if (child instanceof CheckBox checkBox) {
                     tasks.add(checkBox);
+                } else if (child instanceof Button button
+                        && button.getUserData() instanceof CheckBox checkBox) {
+                    deleteButtons.put(checkBox, button);
                 }
             }
         }
@@ -345,18 +469,64 @@ public class TodoListController {
         // Unchecked tasks first, completed tasks last
         tasks.sort(Comparator.comparing(CheckBox::isSelected));
 
-        // Clear rows without deleting lines
-        for (javafx.scene.Node node : taskList.getChildren()) {
+        // Clear the notebook lines
+        for (Node node : taskList.getChildren()) {
             ((HBox) node).getChildren().clear();
         }
 
-        // Put the tasks back in the new order
+        // Put each task and its delete button back together
         for (int i = 0; i < tasks.size(); i++) {
             HBox row = (HBox) taskList.getChildren().get(i);
+            CheckBox checkBox = tasks.get(i);
+            Button deleteButton = deleteButtons.get(checkBox);
 
             row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
             row.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
-            row.getChildren().add(tasks.get(i));
+            row.setSpacing(8);
+
+            checkBox.setMaxWidth(Double.MAX_VALUE);
+            HBox.setHgrow(checkBox, Priority.ALWAYS);
+
+            row.getChildren().add(checkBox);
+
+            if (deleteButton != null) {
+                row.getChildren().add(deleteButton);
+            }
+        }
+    }
+    //clear completed history
+    public static void clearCompletedHistory() throws IOException {
+        Path file = completedSaveFile();
+
+        Files.createDirectories(file.getParent());
+        Files.write(
+                file,
+                new byte[0]
+        );
+    }
+
+    // remove unchecked task from completed folder
+    private void removeCompletedTask(String taskName) {
+        Path file = completedSaveFile();
+
+        try {
+            if (Files.exists(file)) {
+                List<String> completed = new ArrayList<>(
+                        Files.readAllLines(file, StandardCharsets.UTF_8)
+                );
+
+                completed.remove(taskName);
+
+                Files.write(
+                        file,
+                        completed,
+                        StandardCharsets.UTF_8
+                );
+            }
+        } catch (IOException ex) {
+            System.err.println(
+                    "Could not remove completed task: " + ex.getMessage()
+            );
         }
     }
 }

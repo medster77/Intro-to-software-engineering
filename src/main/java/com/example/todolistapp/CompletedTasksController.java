@@ -66,4 +66,19 @@ public class CompletedTasksController {
         stage.setX(e.getScreenX() - xOffset);
         stage.setY(e.getScreenY() - yOffset);
     }
+    @FXML
+    private void onClearHistory() {
+        try {
+            TodoListController.clearCompletedHistory();
+
+            completedList.getChildren().clear();
+
+            countLabel.setText("0 tasks completed");
+            emptyLabel.setVisible(true);
+            emptyLabel.setManaged(true);
+
+        } catch (java.io.IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

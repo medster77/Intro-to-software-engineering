@@ -3,12 +3,13 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox fillWidth="true" prefHeight="460.0" prefWidth="420.0" style="-fx-background-color: #212121; -fx-background-radius: 15; -fx-border-color: #3A3A3A; -fx-border-width: 2; -fx-border-radius: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todolistapp.CompletedTasksController">
    <children>
 
       <!-- Header (draggable) -->
-      <HBox fx:id="dragBar" alignment="CENTER_LEFT" onMouseDragged="#onDragged" onMousePressed="#onDragPressed" prefHeight="48.0" minHeight="48.0" style="-fx-background-color: #171717; -fx-background-radius: 13 13 0 0;">
+      <HBox fx:id="dragBar" alignment="CENTER_LEFT" minHeight="48.0" onMouseDragged="#onDragged" onMousePressed="#onDragPressed" prefHeight="48.0" style="-fx-background-color: #171717; -fx-background-radius: 13 13 0 0;">
          <padding>
             <Insets bottom="0.0" left="18.0" right="10.0" top="0.0" />
          </padding>
@@ -34,8 +35,13 @@
                </content>
             </ScrollPane>
 
-            <HBox alignment="CENTER_RIGHT">
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="100.0" spacing="170.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#onClearHistory" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #ff6b6b;" text="Clear Completed" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                   <Button cancelButton="true" defaultButton="true" mnemonicParsing="false" onAction="#onClose" prefHeight="36.0" prefWidth="90.0" style="-fx-background-color: #10A37F; -fx-background-radius: 8; -fx-text-fill: #FFFFFF; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;" text="Close" />
                </children>
             </HBox>

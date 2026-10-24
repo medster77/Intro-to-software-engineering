@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="Made the new completed folder!!">
+    <list default="true" id="ff819dae-3df6-4fbb-939d-75bc6b4bcbc2" name="Changes" comment="10/19 made addition button function and add task to list, made task go to the top line not under the whole vbox, added a checkbox next to each task, made the checkbox cross out the task when checked and reorganize the list where the checked tasks are at the bottom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/CompletedTasksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/CompletedTasksController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/todolistapp/TodoListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/completed-tasks-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/todolistapp/completed-tasks-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +31,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/medster77/Intro-to-software-engineering&quot;,
-    &quot;accountId&quot;: &quot;4790b88d-e6f9-4b8c-ad9e-17981b11a0c2&quot;
+    &quot;url&quot;: &quot;https://github.com/medster77/Intro-to-software-engineering.git&quot;,
+    &quot;accountId&quot;: &quot;22f16b93-30ba-47c0-b117-83b5364bd0bb&quot;
   }
 }</component>
   <component name="MavenImportPreferences">
@@ -46,61 +48,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000095902509654" />
-      <entry key="MS500" value="1.099167211885832" />
-      <entry key="S2" value="1.5875080334976714" />
-      <entry key="S5" value="2.027457477654674" />
-      <entry key="S10" value="2.4080459238986025" />
-      <entry key="S30" value="3.8488627352757594" />
-      <entry key="S60" value="6.9095297450330575" />
-      <entry key="M2" value="12.09566093010055" />
-      <entry key="M5" value="19.072215841953973" />
-      <entry key="M10" value="22.8458807636083" />
-      <entry key="M15" value="24.376303980599907" />
-      <entry key="M30" value="26.083219941827387" />
-      <entry key="H1" value="27.01297802910704" />
-      <entry key="H2" value="27.49899971234469" />
-      <entry key="H4" value="27.747583955277797" />
-      <entry key="D1" value="27.957660757749846" />
-      <entry key="W1" value="27.99394487665565" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000023314144" />
+      <entry key="S10" value="1.000067897146109" />
+      <entry key="S30" value="1.0646770652168283" />
+      <entry key="S60" value="1.3615830457690858" />
+      <entry key="M2" value="2.059896595225297" />
+      <entry key="M5" value="6.41788502638024" />
+      <entry key="M10" value="13.68267851644447" />
+      <entry key="M15" value="18.270699679179486" />
+      <entry key="M30" value="24.762608194735385" />
+      <entry key="H1" value="28.971963940090316" />
+      <entry key="H2" value="31.37390896475857" />
+      <entry key="H4" value="32.65761252981228" />
+      <entry key="D1" value="33.772075775716075" />
+      <entry key="W1" value="33.96733513889937" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="2.587292729566787E-119" />
-      <entry key="S2" value="2.2553367259775003E-30" />
-      <entry key="S5" value="1.3844732112326501E-12" />
-      <entry key="S10" value="1.1766363972071617E-6" />
-      <entry key="S30" value="0.010557167840576026" />
-      <entry key="S60" value="0.10274807949823699" />
-      <entry key="M2" value="0.32054341281367327" />
-      <entry key="M5" value="0.6343876834354412" />
-      <entry key="M10" value="0.7964845782784763" />
-      <entry key="M15" value="0.8592474412711724" />
-      <entry key="M30" value="0.9269560082717909" />
-      <entry key="H1" value="0.9627855463558803" />
-      <entry key="H2" value="0.9812163606238326" />
-      <entry key="H4" value="0.990563658037096" />
-      <entry key="D1" value="0.9984210567911886" />
-      <entry key="W1" value="0.999774283898666" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="6.691313663937639E-142" />
+      <entry key="S5" value="3.3900379142462676E-57" />
+      <entry key="S10" value="5.822403210227085E-29" />
+      <entry key="S30" value="3.8758541490478443E-10" />
+      <entry key="S60" value="1.968718910623821E-5" />
+      <entry key="M2" value="0.0044370248034283286" />
+      <entry key="M5" value="0.11450824079299757" />
+      <entry key="M10" value="0.33839066298140935" />
+      <entry key="M15" value="0.48560026402469114" />
+      <entry key="M30" value="0.6968502450488849" />
+      <entry key="H1" value="0.8347755656755205" />
+      <entry key="H2" value="0.9136605308732119" />
+      <entry key="H4" value="0.9558559153309727" />
+      <entry key="D1" value="0.9925035573007569" />
+      <entry key="W1" value="0.9989256229502935" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0027621368215155675" />
-      <entry key="MS500" value="0.3234981137611734" />
-      <entry key="S2" value="1.1177364025640248" />
-      <entry key="S5" value="1.7534610570789202" />
-      <entry key="S10" value="2.237530401050847" />
-      <entry key="S30" value="3.7565601948773124" />
-      <entry key="S60" value="6.920377766029229" />
-      <entry key="M2" value="12.340201792254247" />
-      <entry key="M5" value="19.66132592190083" />
-      <entry key="M10" value="23.615981924058097" />
-      <entry key="M15" value="25.2169887759097" />
-      <entry key="M30" value="27.000364707223635" />
-      <entry key="H1" value="27.970716478099135" />
-      <entry key="H2" value="28.47765593889403" />
-      <entry key="H4" value="28.736858241577636" />
-      <entry key="D1" value="28.955865613184024" />
-      <entry key="W1" value="28.993688242479458" />
+      <entry key="MS100" value="9.430621519463357E-9" />
+      <entry key="MS500" value="0.02482607500300327" />
+      <entry key="S2" value="0.3969419654658262" />
+      <entry key="S5" value="0.6910203026801273" />
+      <entry key="S10" value="0.8313364783643676" />
+      <entry key="S30" value="1.0024622275262112" />
+      <entry key="S60" value="1.324345601227811" />
+      <entry key="M2" value="2.039347611649456" />
+      <entry key="M5" value="6.509994960121339" />
+      <entry key="M10" value="14.000467679295271" />
+      <entry key="M15" value="18.73874692232301" />
+      <entry key="M30" value="25.448037224176083" />
+      <entry key="H1" value="29.800185331092816" />
+      <entry key="H2" value="32.284053786161756" />
+      <entry key="H4" value="33.61164710617877" />
+      <entry key="D1" value="34.76426661594286" />
+      <entry key="W1" value="34.96621585903527" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -121,6 +123,7 @@
     &quot;Maven.TodoListApp [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.TodoListApp [compile].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
@@ -138,12 +141,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\chris\IdeaProjects\TodoListApp\src\main\resources\com\example\todolistapp" />
-      <recent name="C:\Users\chris\IdeaProjects\TodoListApp\src\main\resources" />
-    </key>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -224,15 +221,7 @@
       <option name="project" value="LOCAL" />
       <updated>1791383964979</updated>
     </task>
-    <task id="LOCAL-00009" summary="Made the new completed folder!!">
-      <option name="closed" value="true" />
-      <created>1792616810709</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1792616810709</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,8 +256,7 @@
     <MESSAGE value="Put a title name box in there, this can be modified to have a different background color" />
     <MESSAGE value="Got the top bar to actually be able to move and minimize and everything" />
     <MESSAGE value="10/7" />
-    <MESSAGE value="Made the new completed folder!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the new completed folder!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="10/7" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
